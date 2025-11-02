@@ -1,0 +1,25 @@
+{
+  "name": "career-toolkit",
+  "version": "1.0.0",
+  "description": "A comprehensive web-based career toolkit that processes uploaded resumes using AI to generate personalized cold email templates, provides real-time project suggestions, and offers resume improvement recommendations with ATS scoring.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "tailwindcss": "latest",
+    "postcss": "latest",
+    "autoprefixer": "latest"
+  },
+  "devDependencies": {
+    "eslint": "latest",
+    "eslint-config-next": "latest"
+  },
+  "license": "MIT"
+}

@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: career-toolkit
+  labels:
+    app: career-toolkit
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: career-toolkit
+  template:
+    metadata:
+      labels:
+        app: career-toolkit
+    spec:
+      containers:
+        - name: web
+          image: your-docker-repo/career-toolkit-web:latest
+          ports:
+            - containerPort: 3000
+          env:
+            - name: NODE_ENV
+              value: production
+        - name: api
+          image: your-docker-repo/career-toolkit-api:latest
+          ports:
+            - containerPort: 4000
+          env:
+            - name: NODE_ENV
+              value: production
+        - name: worker
+          image: your-docker-repo/career-toolkit-worker:latest
+          env:
+            - name: NODE_ENV
+              value: production
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: career-toolkit
+spec:
+  selector:
+    app: career-toolkit
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
+    - protocol: TCP
+      port: 4000
+      targetPort: 4000
+  type: LoadBalancer

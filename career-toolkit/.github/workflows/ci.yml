@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: |
+          cd web
+          npm install
+          cd ../api
+          npm install
+          cd ../worker
+          npm install
+
+      - name: Run tests
+        run: |
+          cd api
+          npm test
+          cd ../web
+          npm test
+          cd ../worker
+          npm test
+
+      - name: Build
+        run: |
+          cd web
+          npm run build
+          cd ../api
+          npm run build
+          cd ../worker
+          npm run build
+
+      - name: Deploy
+        run: echo "Deploying application..." # Placeholder for deployment step
